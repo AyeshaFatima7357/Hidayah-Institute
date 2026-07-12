@@ -103,13 +103,15 @@ function Index() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.1 }}
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, amount: 0.1 }}
               className="glass-card overflow-hidden"
             >
               <img
                 src={src}
                 alt={`Life at Hidayah ${i + 1}`}
                 className="w-full h-auto object-contain"
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
               />
             </motion.div>
           ))}

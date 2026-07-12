@@ -99,7 +99,6 @@ function AuroraBackground() {
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Gradient 1 — deep teal core, fades to transparent at edges */}
           <linearGradient id="grad1" x1="0%" y1="100%" x2="100%" y2="0%">
             <stop offset="0%"   stopColor="#042f2e" stopOpacity="0" />
             <stop offset="20%"  stopColor="#0f766e" stopOpacity="0.9" />
@@ -107,8 +106,6 @@ function AuroraBackground() {
             <stop offset="80%"  stopColor="#0f766e" stopOpacity="0.9" />
             <stop offset="100%" stopColor="#042f2e" stopOpacity="0" />
           </linearGradient>
-
-          {/* Gradient 2 — vivid cyan, fades harder at both ends */}
           <linearGradient id="grad2" x1="0%" y1="100%" x2="100%" y2="0%">
             <stop offset="0%"   stopColor="#042f2e" stopOpacity="0" />
             <stop offset="15%"  stopColor="#06b6d4" stopOpacity="0.85" />
@@ -116,8 +113,6 @@ function AuroraBackground() {
             <stop offset="82%"  stopColor="#06b6d4" stopOpacity="0.85" />
             <stop offset="100%" stopColor="#042f2e" stopOpacity="0" />
           </linearGradient>
-
-          {/* Gradient 3 — seafoam green, crosses over ribbons 1 & 2 */}
           <linearGradient id="grad3" x1="0%" y1="100%" x2="100%" y2="0%">
             <stop offset="0%"   stopColor="#042f2e" stopOpacity="0" />
             <stop offset="22%"  stopColor="#34d399" stopOpacity="0.8" />
@@ -125,8 +120,6 @@ function AuroraBackground() {
             <stop offset="78%"  stopColor="#34d399" stopOpacity="0.8" />
             <stop offset="100%" stopColor="#042f2e" stopOpacity="0" />
           </linearGradient>
-
-          {/* Gradient 4 — near-white cyan highlight, thin streak */}
           <linearGradient id="grad4" x1="0%" y1="100%" x2="100%" y2="0%">
             <stop offset="0%"   stopColor="#042f2e" stopOpacity="0" />
             <stop offset="28%"  stopColor="#67e8f9" stopOpacity="0.9" />
@@ -134,107 +127,40 @@ function AuroraBackground() {
             <stop offset="72%"  stopColor="#67e8f9" stopOpacity="0.9" />
             <stop offset="100%" stopColor="#042f2e" stopOpacity="0" />
           </linearGradient>
-
-          {/* Glow filter — soft drop-shadow around each ribbon */}
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="6" result="blur" />
+          {/* Lightweight glow — only feGaussianBlur, no composite on mobile */}
+          <filter id="glow" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
         </defs>
 
-        {/*
-          Ribbon 1 — wide teal band
-          Starts wide at bottom-left (~y900–1100),
-          PINCHES inward at mid-screen (x~450–550, y~550–650),
-          fans back out top-right (~y200–400)
-        */}
         <path
           className="svg-ribbon-1"
-          d="
-            M -80 1100
-            C 100 980, 280 780, 460 640
-            C 580 550, 700 540, 860 420
-            C 960 360, 1050 300, 1100 220
-            L 1100 340
-            C 1020 400, 920 460, 800 530
-            C 650 620, 530 650, 420 740
-            C 260 860, 120 1020, -80 1200
-            Z
-          "
+          d="M -80 1100 C 100 980, 280 780, 460 640 C 580 550, 700 540, 860 420 C 960 360, 1050 300, 1100 220 L 1100 340 C 1020 400, 920 460, 800 530 C 650 620, 530 650, 420 740 C 260 860, 120 1020, -80 1200 Z"
           fill="url(#grad1)"
           opacity="0.85"
           style={{ mixBlendMode: "screen" }}
           filter="url(#glow)"
         />
-
-        {/*
-          Ribbon 2 — cyan band
-          Starts HIGHER than ribbon 1 at left (~y700–900),
-          CROSSES OVER ribbon 1 at mid (x~480, y~580),
-          exits LOWER than ribbon 1 at top-right (~y300–480)
-        */}
         <path
           className="svg-ribbon-2"
-          d="
-            M -80 880
-            C 80 780, 240 660, 400 590
-            C 500 540, 600 560, 720 530
-            C 880 490, 1000 400, 1100 350
-            L 1100 440
-            C 980 490, 860 570, 700 610
-            C 580 640, 480 640, 380 690
-            C 220 760, 80 880, -80 1000
-            Z
-          "
+          d="M -80 880 C 80 780, 240 660, 400 590 C 500 540, 600 560, 720 530 C 880 490, 1000 400, 1100 350 L 1100 440 C 980 490, 860 570, 700 610 C 580 640, 480 640, 380 690 C 220 760, 80 880, -80 1000 Z"
           fill="url(#grad2)"
           opacity="0.80"
           style={{ mixBlendMode: "screen" }}
           filter="url(#glow)"
         />
-
-        {/*
-          Ribbon 3 — seafoam green, widest
-          Starts BELOW both at left (~y1000–1250),
-          arcs UP aggressively mid-screen crossing both,
-          lands BETWEEN them at top-right (~y260–440)
-        */}
         <path
           className="svg-ribbon-3"
-          d="
-            M -80 1280
-            C 60 1120, 200 900, 380 760
-            C 500 670, 640 620, 800 570
-            C 920 530, 1020 460, 1100 400
-            L 1100 520
-            C 1000 570, 880 630, 740 670
-            C 580 720, 440 760, 320 870
-            C 180 990, 60 1160, -80 1400
-            Z
-          "
+          d="M -80 1280 C 60 1120, 200 900, 380 760 C 500 670, 640 620, 800 570 C 920 530, 1020 460, 1100 400 L 1100 520 C 1000 570, 880 630, 740 670 C 580 720, 440 760, 320 870 C 180 990, 60 1160, -80 1400 Z"
           fill="url(#grad3)"
           opacity="0.80"
           style={{ mixBlendMode: "screen" }}
           filter="url(#glow)"
         />
-
-        {/*
-          Ribbon 4 — thin crisp highlight streak
-          Threads THROUGH the pinch point of ribbons 1 & 2,
-          the intersection zone glows brightest due to screen blend
-        */}
         <path
           className="svg-ribbon-4"
-          d="
-            M -80 960
-            C 120 860, 300 720, 460 630
-            C 560 570, 660 555, 780 510
-            C 900 468, 1010 400, 1100 355
-            L 1100 395
-            C 1000 438, 890 504, 770 546
-            C 650 588, 548 606, 446 668
-            C 290 760, 110 900, -80 1010
-            Z
-          "
+          d="M -80 960 C 120 860, 300 720, 460 630 C 560 570, 660 555, 780 510 C 900 468, 1010 400, 1100 355 L 1100 395 C 1000 438, 890 504, 770 546 C 650 588, 548 606, 446 668 C 290 760, 110 900, -80 1010 Z"
           fill="url(#grad4)"
           opacity="0.90"
           style={{ mixBlendMode: "screen" }}

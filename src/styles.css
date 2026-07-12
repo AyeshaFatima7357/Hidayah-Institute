@@ -45,10 +45,24 @@
   &::-webkit-scrollbar { display: none; }
 }
 
-@utility svg-ribbon-1 { animation: svg-ribbon-1 20s ease-in-out infinite; transform-origin: center; }
-@utility svg-ribbon-2 { animation: svg-ribbon-2 26s ease-in-out infinite; transform-origin: center; }
-@utility svg-ribbon-3 { animation: svg-ribbon-3 23s ease-in-out infinite; transform-origin: center; }
-@utility svg-ribbon-4 { animation: svg-ribbon-4 17s ease-in-out infinite; transform-origin: center; }
+@utility svg-ribbon-1 { animation: svg-ribbon-1 20s ease-in-out infinite; transform-origin: center; will-change: transform; }
+@utility svg-ribbon-2 { animation: svg-ribbon-2 26s ease-in-out infinite; transform-origin: center; will-change: transform; }
+@utility svg-ribbon-3 { animation: svg-ribbon-3 23s ease-in-out infinite; transform-origin: center; will-change: transform; }
+@utility svg-ribbon-4 { animation: svg-ribbon-4 17s ease-in-out infinite; transform-origin: center; will-change: transform; }
+
+/* Pause aurora animations on mobile to save GPU/CPU */
+@media (max-width: 768px) {
+  .svg-ribbon-1, .svg-ribbon-2, .svg-ribbon-3, .svg-ribbon-4 {
+    animation-play-state: paused;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .svg-ribbon-1, .svg-ribbon-2, .svg-ribbon-3, .svg-ribbon-4 {
+    animation: none;
+  }
+}
 
 @utility glass-card {
   background-color: rgb(255 255 255 / 0.05);
@@ -58,12 +72,23 @@
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
   transition: transform 300ms ease-out, background-color 300ms ease-out,
     border-color 300ms ease-out, box-shadow 300ms ease-out;
+  will-change: transform;
 
   &:hover {
     transform: translateY(-8px) scale(1.02);
     background-color: rgb(255 255 255 / 0.10);
     border-color: rgb(255 255 255 / 0.20);
     box-shadow: 0 20px 40px -15px rgba(20, 184, 166, 0.25);
+  }
+}
+
+/* Disable glass-card hover lift on mobile — saves paint cost */
+@media (max-width: 768px) {
+  .glass-card:hover {
+    transform: none;
+    background-color: rgb(255 255 255 / 0.05);
+    border-color: rgb(255 255 255 / 0.10);
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
   }
 }
 

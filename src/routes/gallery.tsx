@@ -93,9 +93,8 @@ function CarouselSection({
   const scrollRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const rafRef = useRef<number | null>(null);
 
-  // IntersectionObserver — watches each card against the scroll container.
-  // The card whose centre is closest to the container centre is "active".
   const updateActive = useCallback(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -109,16 +108,25 @@ function CarouselSection({
       if (dist < minDist) { minDist = dist; closest = i; }
     });
     setActiveIndex(closest);
+    rafRef.current = null;
   }, []);
+
+  // Throttle scroll handler via requestAnimationFrame
+  const onScroll = useCallback(() => {
+    if (rafRef.current !== null) return;
+    rafRef.current = requestAnimationFrame(updateActive);
+  }, [updateActive]);
 
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
-    // Set first card active on mount
     updateActive();
-    container.addEventListener("scroll", updateActive, { passive: true });
-    return () => container.removeEventListener("scroll", updateActive);
-  }, [updateActive]);
+    container.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      container.removeEventListener("scroll", onScroll);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, [onScroll, updateActive]);
 
   return (
     <motion.section
@@ -165,6 +173,7 @@ function CarouselSection({
                   alt={img.alt}
                   className={`w-full h-full ${objectFit === "contain" ? "object-contain" : "object-cover"}`}
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             );
