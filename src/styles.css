@@ -70,8 +70,10 @@
   border: 1px solid rgb(255 255 255 / 0.10);
   border-radius: 1.5rem;
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
-  transition: transform 300ms ease-out, background-color 300ms ease-out,
-    border-color 300ms ease-out, box-shadow 300ms ease-out;
+  transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              background-color 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              border-color 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform;
 
   &:hover {
@@ -82,8 +84,12 @@
   }
 }
 
-/* Disable glass-card hover lift on mobile — saves paint cost */
+/* On mobile: reduce backdrop-blur cost and disable hover lift */
 @media (max-width: 768px) {
+  .glass-card {
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+  }
   .glass-card:hover {
     transform: none;
     background-color: rgb(255 255 255 / 0.05);
@@ -235,5 +241,13 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    /* Smooth font rendering on mobile */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Native momentum scrolling on iOS for the whole page */
+  html {
+    -webkit-overflow-scrolling: touch;
   }
 }

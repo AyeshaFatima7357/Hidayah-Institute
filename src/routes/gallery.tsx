@@ -130,10 +130,10 @@ function CarouselSection({
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="mt-20 space-y-5"
     >
       <h2 className="text-2xl sm:text-3xl font-semibold text-white">{title}</h2>
@@ -146,6 +146,8 @@ function CarouselSection({
           style={{
             maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
             WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+            touchAction: "pan-x",
+            WebkitOverflowScrolling: "touch",
           }}
         >
           {/* Leading spacer — half viewport so first card can truly centre */}
@@ -158,11 +160,12 @@ function CarouselSection({
                 key={img.src}
                 ref={(el) => { cardRefs.current[i] = el; }}
                 className="snap-center shrink-0 w-80 md:w-[400px] aspect-[4/3] rounded-2xl overflow-hidden
-                           border-2 border-white bg-white/5 backdrop-blur-lg
-                           transition-all duration-500 ease-out"
+                           border-2 border-white bg-white/5 backdrop-blur-lg"
                 style={{
                   transform: isActive ? "scale(1.05)" : "scale(0.88)",
                   opacity: isActive ? 1 : 0.5,
+                  transition: "transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  willChange: "transform, opacity",
                   boxShadow: isActive
                     ? "0 25px 60px -10px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.15)"
                     : "0 8px 20px -8px rgba(0,0,0,0.4)",
@@ -201,9 +204,9 @@ function GalleryPage() {
       {/* Page Header */}
       <motion.header
         className="text-center max-w-2xl mx-auto space-y-4"
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <h1 className="text-3xl sm:text-5xl font-bold text-white">
           Moments at <span className="text-accent-gradient">Hidayah</span>

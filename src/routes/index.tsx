@@ -9,10 +9,10 @@ export const Route = createFileRoute("/")({
 const stages = ["6th", "10th", "Inter", "Poly"];
 
 const fadeUp = {
-  initial: { opacity: 0, y: 40 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, ease: "easeOut" as const },
-  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  viewport: { once: true, amount: 0.1 },
 };
 
 function Timeline() {
@@ -39,9 +39,9 @@ function Index() {
     <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 py-16 sm:py-24 space-y-20">
       {/* Hero */}
       <motion.section
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="text-center space-y-8"
       >
         <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-tight">
@@ -100,9 +100,9 @@ function Index() {
           {["/life-1.jpg", "/life-2.jpg", "/life-3.jpg"].map((src, i) => (
             <motion.div
               key={src}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.1 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: i * 0.08 }}
               viewport={{ once: true, amount: 0.1 }}
               className="glass-card overflow-hidden"
             >
@@ -127,10 +127,10 @@ function Index() {
         ].map((s, i) => (
           <motion.div
             key={s.big}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.1 }}
-            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: i * 0.08 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="glass-card px-6 py-10 text-center"
           >
             <div className="text-5xl font-bold text-accent-gradient">
