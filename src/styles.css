@@ -288,3 +288,17 @@
     transition-duration: 200ms !important;
   }
 }
+
+/* ── Home page mobile optimizations ── */
+@media (max-width: 768px) {
+  /* Reduce timeline dot glow cost on mobile */
+  .timeline-dot {
+    box-shadow: 0 0 10px rgba(45,212,191,0.5) !important;
+  }
+
+  /* Use content-visibility on below-fold home sections to defer paint */
+  .home-section-lazy {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 300px;
+  }
+}
