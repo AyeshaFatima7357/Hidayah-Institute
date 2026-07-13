@@ -87,14 +87,20 @@
 /* On mobile: reduce backdrop-blur cost and disable hover lift */
 @media (max-width: 768px) {
   .glass-card {
-    backdrop-filter: blur(12px) saturate(120%);
-    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    backdrop-filter: blur(8px) saturate(110%);
+    -webkit-backdrop-filter: blur(8px) saturate(110%);
   }
   .glass-card:hover {
     transform: none;
     background-color: rgb(255 255 255 / 0.05);
     border-color: rgb(255 255 255 / 0.10);
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+  }
+
+  /* Carousel cards — reduce backdrop blur further */
+  .carousel-card {
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
   }
 }
 

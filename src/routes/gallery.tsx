@@ -160,11 +160,11 @@ function CarouselSection({
                 key={img.src}
                 ref={(el) => { cardRefs.current[i] = el; }}
                 className="snap-center shrink-0 w-80 md:w-[400px] aspect-[4/3] rounded-2xl overflow-hidden
-                           border-2 border-white bg-white/5 backdrop-blur-lg"
+                           border-2 border-white bg-white/5 backdrop-blur-lg carousel-card"
                 style={{
                   transform: isActive ? "scale(1.05)" : "scale(0.88)",
                   opacity: isActive ? 1 : 0.5,
-                  transition: "transform 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  transition: "transform 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                   willChange: "transform, opacity",
                   boxShadow: isActive
                     ? "0 25px 60px -10px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.15)"
