@@ -56,10 +56,10 @@ const courses = [
 ];
 
 const fadeUp = {
-  initial: { opacity: 0, y: 40 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.7, ease: "easeOut" as const },
-  viewport: { once: true, margin: "-100px" },
+  transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  viewport: { once: true, amount: 0.1 },
 };
 
 function CoursesPage() {
@@ -67,9 +67,9 @@ function CoursesPage() {
     <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-8 py-16 sm:py-24 space-y-12">
       <motion.header
         className="text-center max-w-4xl mx-auto"
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
       >
         <h1 className="text-3xl sm:text-5xl font-bold leading-tight text-white">
           What students lack at school,{" "}
@@ -81,10 +81,10 @@ function CoursesPage() {
         {courses.map((c, idx) => (
           <motion.div
             key={c.heading}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: idx * 0.1 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const, delay: idx * 0.08 }}
             className="glass-card relative z-10 p-6 sm:p-8 flex flex-col gap-4"
           >
             <h2 className="text-xl sm:text-2xl font-semibold text-white">{c.heading}</h2>

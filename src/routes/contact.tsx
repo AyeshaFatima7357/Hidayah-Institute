@@ -49,9 +49,9 @@ function ContactPage() {
     <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-8 py-16 sm:py-24 space-y-12">
       <motion.header
         className="text-center"
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
       >
         <h1 className="text-3xl sm:text-5xl font-bold text-white">
           Get in <span className="text-accent-gradient">touch</span>
@@ -60,10 +60,10 @@ function ContactPage() {
 
       <div className="grid gap-8 lg:grid-cols-2 items-start">
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const }}
         className="glass-card p-6 sm:p-10 flex flex-col gap-8"
       >
         <Detail icon={<User size={20} />} label="Founder of Hidayah Institute">
@@ -106,10 +106,10 @@ function ContactPage() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const, delay: 0.05 }}
         className="flex flex-col gap-4"
       >
         <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
