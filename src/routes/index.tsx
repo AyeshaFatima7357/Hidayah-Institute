@@ -1,13 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
-import { useSkipAnimations } from "../hooks/use-reduced-motion";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 const stages = ["6th", "10th", "Inter", "Poly"];
+
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  viewport: { once: true, amount: 0.1 },
+};
 
 function Timeline() {
   return (
@@ -29,30 +35,15 @@ function Timeline() {
 }
 
 function Index() {
-  const skip = useSkipAnimations();
-
-  // On mobile: no animation — content appears instantly
-  const fadeUp = skip
-    ? {}
-    : {
-        initial: { opacity: 0, y: 20 },
-        whileInView: { opacity: 1, y: 0 },
-        transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
-        viewport: { once: true, amount: 0.1 },
-      };
-
-  const heroAnim = skip
-    ? {}
-    : {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
-      };
-
   return (
     <div className="mx-auto w-full max-w-6xl px-4 sm:px-8 py-16 sm:py-24 space-y-20">
       {/* Hero */}
-      <motion.section {...heroAnim} className="text-center space-y-8">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+        className="text-center space-y-8"
+      >
         <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-tight">
           Every student, <span className="text-accent-gradient">understood</span>
         </h1>
@@ -79,9 +70,9 @@ function Index() {
       {/* Quote */}
       <motion.section {...fadeUp} className="glass-card px-6 sm:px-12 py-10 text-center">
         <p className="italic text-lg sm:text-xl text-slate-200 leading-relaxed max-w-3xl mx-auto">
-          "There's no greater wealth than wisdom, no greater poverty than
+          “There's no greater wealth than wisdom, no greater poverty than
           ignorance, no greater heritage than culture, and no greater support
-          than consultation."
+          than consultation.”
         </p>
       </motion.section>
 
@@ -109,12 +100,10 @@ function Index() {
           {["/life-1.jpg", "/life-2.jpg", "/life-3.jpg"].map((src, i) => (
             <motion.div
               key={src}
-              {...(skip ? {} : {
-                initial: { opacity: 0, y: 20 },
-                whileInView: { opacity: 1, y: 0 },
-                transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: i * 0.08 },
-                viewport: { once: true, amount: 0.1 },
-              })}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: i * 0.08 }}
+              viewport={{ once: true, amount: 0.1 }}
               className="glass-card overflow-hidden"
             >
               <img
@@ -138,15 +127,15 @@ function Index() {
         ].map((s, i) => (
           <motion.div
             key={s.big}
-            {...(skip ? {} : {
-              initial: { opacity: 0, y: 20 },
-              whileInView: { opacity: 1, y: 0 },
-              transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: i * 0.08 },
-              viewport: { once: true, amount: 0.1 },
-            })}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94], delay: i * 0.08 }}
+            viewport={{ once: true, amount: 0.1 }}
             className="glass-card px-6 py-10 text-center"
           >
-            <div className="text-5xl font-bold text-accent-gradient">{s.big}</div>
+            <div className="text-5xl font-bold text-accent-gradient">
+              {s.big}
+            </div>
             <div className="mt-3 text-sm text-slate-400">{s.small}</div>
           </motion.div>
         ))}

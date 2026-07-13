@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { useSkipAnimations } from "../hooks/use-reduced-motion";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -91,7 +90,6 @@ function CarouselSection({
   images: { src: string; alt: string }[];
   objectFit?: "cover" | "contain";
 }) {
-  const skip = useSkipAnimations();
   const scrollRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -132,12 +130,10 @@ function CarouselSection({
 
   return (
     <motion.section
-      {...(skip ? {} : {
-        initial: { opacity: 0, y: 20 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.05 },
-        transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-      })}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.05 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="mt-20 space-y-5"
     >
       <h2 className="text-2xl sm:text-3xl font-semibold text-white">{title}</h2>
@@ -202,18 +198,15 @@ function CarouselSection({
 
 // ── Page ──────────────────────────────────────────────────────────────────
 function GalleryPage() {
-  const skip = useSkipAnimations();
   return (
     <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-8 py-16 sm:py-24 space-y-12">
 
       {/* Page Header */}
       <motion.header
         className="text-center max-w-2xl mx-auto space-y-4"
-        {...(skip ? {} : {
-          initial: { opacity: 0, y: 20 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
-        })}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
         <h1 className="text-3xl sm:text-5xl font-bold text-white">
           Moments at <span className="text-accent-gradient">Hidayah</span>
